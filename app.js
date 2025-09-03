@@ -1,15 +1,15 @@
-const front = document.getElementById("front");
-const back = document.getElementById("back");
 const button = document.getElementById("myBtn");
+const coin = document.getElementById("coin");
 
 button.addEventListener("click", () => {
-  const n = Math.floor(Math.random() * 2) + 1;
 
-  if (n === 1) {
-    front.style.display = "flex";
-    back.style.display = "none";
-  } else {
-    back.style.display = "flex";
-    front.style.display = "none";
-  }
+  coin.classList.remove("flipping-heads", "flipping-tails");
+  
+  // Tvangs animation reset
+  coin.classList.add("reset");
+  void coin.offsetWidth; 
+  coin.classList.remove("reset");
+
+  const n = Math.floor(Math.random() * 2) + 1;
+  coin.classList.add(n === 1 ? "flipping-heads" : "flipping-tails");
 });

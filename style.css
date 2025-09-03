@@ -2,8 +2,19 @@ body {
   margin: 0;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
+  perspective: 1000px;
+  background: linear-gradient(45deg, #d6eaff, #ffd6e6); 
+  animation: backgroundShift 6s ease-in-out infinite; 
+}
+
+@keyframes backgroundShift {
+  0% { background: linear-gradient(45deg, #d6eaff, #ffd6e6); } 
+  50% { background: linear-gradient(45deg, #ffd6e6, #d6eaff); } 
+  100% { background: linear-gradient(45deg, #d6eaff, #ffd6e6); } 
 }
 
 #coin {
@@ -11,8 +22,6 @@ body {
   height: 120px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1s ease-in-out;
-  perspective: 1000px;
 }
 
 .side {
@@ -36,13 +45,42 @@ body {
 
 #back {
   background: radial-gradient(circle, #ffd700, #b8860b);
-  /* transform: rotateY(180deg);  */
-}
-
-/* #coin:hover {
   transform: rotateY(180deg);
 }
 
-#coin.flipping {
-  transform: rotateY(180deg);
-} */
+@keyframes flip-heads {
+  0% { transform: rotateY(0deg) scale(1); }
+  33% { transform: rotateY(540deg) scale(1.4); }
+  100% { transform: rotateY(1080deg) scale(1); }
+}
+
+@keyframes flip-tails {
+  0% { transform: rotateY(0deg) scale(1); }
+  33% { transform: rotateY(720deg) scale(1.4); }
+  100% { transform: rotateY(1260deg) scale(1); }
+}
+
+#coin.flipping-heads {
+  animation: flip-heads 1.2s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+}
+
+#coin.flipping-tails {
+  animation: flip-tails 1.2s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+}
+
+#myBtn {
+  font-size: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out, box-shadow 0.3s ease-out;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#myBtn:hover {
+  transform: scale(1.1);
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
